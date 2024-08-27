@@ -19,7 +19,13 @@ cv2.namedWindow('show3d')
 cv2.moveWindow('show3d', 0, 0)
 cv2.setMouseCallback('show3d', onmouse)
 
-dll = np.ctypeslib.load_library('render_balls_so', '.')
+# dll = np.ctypeslib.load_library('render_balls_so', '.')
+# dll = np.ctypeslib.load_library('./render_balls_so', '.')
+try:
+    dll = np.ctypeslib.load_library('/Users/lee/Git Projects/pointnet.pytorch/utils/render_balls_so', '.')
+    print("Shared library loaded successfully")
+except OSError as e:
+    print("Failed to load the shared library:", e)
 
 def showpoints(xyz,c_gt=None, c_pred = None, waittime=0, 
     showrot=False, magnifyBlue=0, freezerot=False, background=(0,0,0), 
