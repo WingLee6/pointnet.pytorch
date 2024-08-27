@@ -1,0 +1,5 @@
+project_directory: /Users/lee/Git Projects/pointnet.pytorch
+paths:
+  dataset_path: datasets/shapenetcore_partanno_segmentation_benchmark_v0
+  classifier_model_path: utils/cls/cls_model_0.pth
+  segmentation_model_path: utils/seg/seg_model_Chair_0.pth

@@ -24,8 +24,11 @@ cv2.setMouseCallback('show3d', onmouse)
 # dll = np.ctypeslib.load_library('render_balls_so', '.')
 # dll = np.ctypeslib.load_library('./render_balls_so', '.')
 try:
-    dll=np.ctypeslib.load_library(os.path.join(BASE_DIR, 'render_balls_so'),'.')
+    # dll=np.ctypeslib.load_library(os.path.join(BASE_DIR, 'render_balls_so'),'.')
+    # dll=np.ctypeslib.load_library(os.path.join(BASE_DIR, 'render_balls_so'),'.')
+    dll = np.ctypeslib.load_library('render_balls_so.so', '.')
     # dll = np.ctypeslib.load_library('/Users/lee/Git Projects/pointnet.pytorch/utils/render_balls_so', '.')
+    dll = ct.cdll.LoadLibrary('/Users/lee/Git Projects/pointnet.pytorch/utils/render_balls_so.so')
     print("Shared library loaded successfully")
 except OSError as e:
     raise OSError("Failed to load the shared library: " + str(e))

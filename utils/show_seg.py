@@ -10,21 +10,46 @@ from pointnet.dataset import ShapeNetDataset
 from pointnet.model import PointNetDenseCls
 import matplotlib.pyplot as plt
 
+
+import yaml
+import os
+
+# 从配置文件加载项目相关的配置信息
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
+
+# 获取项目的根目录路径
+project_directory = config['project_directory']
+
+# 根据配置文件中的相对路径构建数据集路径、训练结果路径和检查点路径
+dataset_path = os.path.join(project_directory, config['paths']['dataset_path'])
+classifier_model_path = os.path.join(project_directory, config['paths']['classifier_model_path'])
+segmentation_model_path = os.path.join(project_directory, config['paths']['segmentation_model_path'])
+print("数据集路径: ", dataset_path)
+print("分类器模型路径: ", classifier_model_path)
+print("分割模型路径: ", segmentation_model_path)
+
+# 分割的类别
+class_choice = 'Mug'
+
 def main(): 
+    
+
+    # 加载 ShapeNet 数据集
     # 命令行参数解析
     parser = argparse.ArgumentParser()
 
     # 模型路径
-    parser.add_argument('--model', type=str, default='/Users/lee/Git Projects/pointnet.pytorch/utils/seg/seg_model_Chair_0.pth', help='model path')
+    parser.add_argument('--model', type=str, default=segmentation_model_path, help='model path')
 
     # 数据集中的模型索引
     parser.add_argument('--idx', type=int, default=0, help='model index')
 
     # 数据集路径
-    parser.add_argument('--dataset', type=str, default='/Users/lee/Git Projects/pointnet.pytorch/datasets/shapenetcore_partanno_segmentation_benchmark_v0', help='dataset path')
+    parser.add_argument('--dataset', type=str, default=dataset_path, help='dataset path')
 
     # 类别选择
-    parser.add_argument('--class_choice', type=str, default='Chair', help='class choice')
+    parser.add_argument('--class_choice', type=str, default=class_choice, help='class choice')
 
     # 解析命令行参数
     opt = parser.parse_args()
